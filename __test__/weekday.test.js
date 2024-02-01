@@ -32,4 +32,13 @@ describe('Weekday', () => {
     weekday.calculateDay();
     expect(weekday.finalDay).toEqual("Saturday");
   });
+
+  test('should return true for valid date and false for invalid date', () => {
+    weekday.assignInfo();
+    weekday.isValid();
+    let invalidWeekday = new Weekday("January","32", "2000");
+    invalidWeekday.assignInfo();
+    expect(weekday.isValid()).toEqual(true);
+    expect(invalidWeekday.isValid()).toEqual(false);
+  });
 });

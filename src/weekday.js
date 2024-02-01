@@ -4,8 +4,12 @@ export default class Weekday {
   }
 
   assignInfo() {
-    this.day = parseInt(this.info[1]);
-    this.year = parseInt(this.info[2]);
+    if(parseInt(this.info[1])) {
+      this.day = parseInt(this.info[1]);
+    }
+    if(parseInt(this.info[2])) {
+      this.year = parseInt(this.info[2]);
+    }
 
     this.leapYear = this.year%4 === 0 ? true:false;
 
@@ -71,6 +75,30 @@ export default class Weekday {
     }
   }
 
+  isValid() {
+    let monthType = 0;
+    if(this.year < 1753 || this.year > 2099 || this.day < 1) {
+      return false;
+    }
+    if(this.month%2 === 1 && this.month < 10) {
+      monthType = 31;
+    } else if(this.month === 2) {
+      if(this.leapYear) {
+        monthType = 29;
+      } else {
+        monthType = 28;
+      }
+    } else if(this.month%2 === 0 && this.month < 10) {
+      monthType = 30;
+    } else if(this.month%2 === 1 && this.month > 10) {
+      monthType = 30;
+    } else if(this.month%2 === 0 && this.month > 10) {
+      monthType = 31;
+    }
+    console.log(monthType);
+    return this.day <= monthType;
+  }
+
   calculateDay() {
     let refactor = 0;
     if(this.year <= 1800) {
@@ -85,22 +113,22 @@ export default class Weekday {
       case(0):
         this.finalDay = "Saturday";
         break;
-      case(0):
+      case(1):
         this.finalDay = "Sunday";
         break;
-      case(0):
+      case(2):
         this.finalDay = "Monday";
         break;
-      case(0):
+      case(3):
         this.finalDay = "Tuesday";
         break;
-      case(0):
+      case(4):
         this.finalDay = "Wednesday";
         break;
-      case(0):
+      case(5):
         this.finalDay = "Thursday";
         break;
-      case(0):
+      case(6):
         this.finalDay = "Friday";
         break;
       default:
