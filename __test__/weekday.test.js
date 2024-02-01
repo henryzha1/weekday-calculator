@@ -16,4 +16,20 @@ describe('Weekday', () => {
     expect(weekday.day).toEqual(1);
     expect(weekday.year).toEqual(2000);
   });
+
+  test('should detect leap year or not', () => {
+    weekday.assignInfo();
+    expect(weekday.leapYear).toEqual(true);
+  });
+
+  test('should assign Month Key', () => {
+    weekday.assignInfo();
+    expect(weekday.keyMonth).toEqual(0);
+  });
+
+  test('should calculate the day of the given date', () => {
+    weekday.assignInfo();
+    weekday.calculateDay();
+    expect(weekday.finalDay).toEqual("Saturday");
+  });
 });
